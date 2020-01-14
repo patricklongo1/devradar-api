@@ -1,8 +1,13 @@
 import { Router } from 'express';
 
-const routes = new Router();
-// import Controller from './Controllers/Controller';
+import DevController from './controllers/DevController';
+import SearchController from './controllers/SearchController';
 
-// routes.post('/boxes', Controller.store);
+const routes = new Router();
+
+routes.get('/devs', DevController.index);
+routes.post('/devs', DevController.store);
+
+routes.get('/search', SearchController.index);
 
 export default routes;

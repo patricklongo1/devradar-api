@@ -4,9 +4,10 @@ import mongoose from 'mongoose';
 
 import routes from './routes';
 
-mongoose.connect('mongodb://localhost:27017/rocketbox', {
+mongoose.connect('mongodb://localhost:27017/devradar', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 });
 
 const app = express();
