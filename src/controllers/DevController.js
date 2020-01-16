@@ -1,17 +1,17 @@
 /* eslint-disable no-undef */
-import api from 'axios-https-proxy-fix';
+// import api from 'axios-https-proxy-fix';
 import Dev from '../models/Dev';
 import parseStringAsArray from '../utils/parseStringAsArray';
-// import api from '../services/api';
+import api from '../services/api';
 
-const proxy = {
+/* const proxy = {
   host: 'proxylatam.indra.es',
   port: 8080,
   auth: {
     username: 'plongo',
     password: 'Pkl180894',
   },
-};
+}; */
 
 class DevController {
   async index(req, res) {
@@ -27,10 +27,7 @@ class DevController {
       let dev = await Dev.findOne({ github_username });
 
       if (!dev) {
-        const response = await api.get(
-          `https://api.github.com/users/${github_username}`,
-          { proxy }
-        );
+        const response = await api.get(`/users/${github_username}`);
 
         const { name = login, avatar_url, bio } = response.data;
 
@@ -53,7 +50,7 @@ class DevController {
 
       res.json(dev);
     } catch (error) {
-      console.log(error);
+      res.status(404).json('Bad Request');
     }
   }
 }
