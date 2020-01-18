@@ -3,6 +3,7 @@
 import Dev from '../models/Dev';
 import parseStringAsArray from '../utils/parseStringAsArray';
 import api from '../services/api';
+import { findConnections, sendMessage } from '../websocket';
 
 /* const proxy = {
   host: 'proxylatam.indra.es',
@@ -46,11 +47,19 @@ class DevController {
           techs: techsArray,
           location,
         });
+
+        const sendSocketMessageTo = findConnections(
+          { latitude, longitude },
+          techsArray
+        );
+
+        sendMessage(sendSocketMessageTo, 'new-dev', dev);
       }
 
       res.json(dev);
     } catch (error) {
       res.status(404).json('Bad Request');
+      console.log(error);
     }
   }
 }
