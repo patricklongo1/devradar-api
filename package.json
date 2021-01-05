@@ -18,7 +18,7 @@
     "sucrase": "^3.12.1"
   },
   "dependencies": {
-    "axios": "^0.19.1",
+    "axios": "^0.21.1",
     "axios-https-proxy-fix": "^0.17.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
